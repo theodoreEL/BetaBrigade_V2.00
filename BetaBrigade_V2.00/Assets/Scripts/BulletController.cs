@@ -8,6 +8,7 @@ public class BulletController : MonoBehaviour {
     public Vector2 direction;
     public PlayerController player;
     private Rigidbody2D bullet;
+    public GameObject healthPotion;
 
     private void Awake()
     {
@@ -33,10 +34,20 @@ public class BulletController : MonoBehaviour {
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
-        else if (other.tag == "Projectile")
-            return;
-        else
+        else if(other.tag == "Destroyable")
+        {
+            int spawnChance = Random.Range(0, 51);
+
+            if (spawnChance <= 10)
+            {
+                Instantiate(healthPotion, transform.position, transform.rotation);
+                
+            }
+
+            Destroy(other.gameObject);
             Destroy(gameObject);
+        }
+       
     }
 
 }

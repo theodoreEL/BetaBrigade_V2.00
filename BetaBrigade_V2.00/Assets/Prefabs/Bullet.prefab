@@ -92,6 +92,8 @@ MonoBehaviour:
   speed: 7
   direction: {x: 0, y: 0}
   player: {fileID: 114802637706491002, guid: 794609efbd1d43a4986b30c85d564813, type: 2}
+  healthPotion: {fileID: 1349989327428024, guid: ac203a08bd778bc4e9fe6a90f0f61080,
+    type: 2}
 --- !u!212 &212140902731927660
 SpriteRenderer:
   m_ObjectHideFlags: 1
