@@ -10,17 +10,41 @@ public class EnemyMovement: MonoBehaviour {
     private float horizMoveVelocity;
     private float vertMoveVelocity;
     public bool left, right, up, down;
+    public float knockback;
+    public float knockbackLength;
+    //[HideInInspector]
+    //public Vector3 hitLocation;
+    private Vector2 referenceHit;
+    float step;
 
     // Use this for initialization
     void Start () {
         Player = GameObject.FindGameObjectWithTag("Player");
 
-	}
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
-        float step = speed * Time.deltaTime;
-		if(Vector2.Distance(Player.transform.position, transform.position) <= range)
+        step = speed * Time.deltaTime;
+        MoveEnemy();
+       /* if (hitLocation == Vector3.zero)
+        {
+            Invoke("MoveEnemy", .4f);
+        }
+        else
+        {
+            referenceHit = hitLocation - transform.position;
+            enemyRB.velocity = new Vector3(referenceHit.x / Mathf.Abs(referenceHit.x) * (-knockback), referenceHit.y / Mathf.Abs(referenceHit.x) * (-knockback));
+            hitLocation = Vector3.zero;
+        }*/
+    }
+
+
+
+    private void MoveEnemy()
+    {
+        if (Vector2.Distance(Player.transform.position, transform.position) <= range)
         {
             //transform.Translate(Vector2.MoveTowards(transform.position, -Player.position, 0) * Time.deltaTime);
             //transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, step);
@@ -120,5 +144,5 @@ public class EnemyMovement: MonoBehaviour {
                 transform.Translate(Vector2.down * step);
             }
         }
-	}
+    }
 }

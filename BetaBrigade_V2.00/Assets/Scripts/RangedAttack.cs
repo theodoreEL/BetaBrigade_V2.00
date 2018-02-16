@@ -116,7 +116,7 @@ public class RangedAttack : MonoBehaviour {
 
             Destroy(gameObject);
         }
-        else if (other.tag == "Enemy")
+        else if (other.tag == "Enemy" || other.tag == "Projectile")
             return;
         else
             Destroy(gameObject);

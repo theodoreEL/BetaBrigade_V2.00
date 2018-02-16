@@ -8,10 +8,12 @@ public class BulletController : MonoBehaviour {
     public Vector2 direction;
     public PlayerController player;
     private Rigidbody2D bullet;
+    public int damageGiven = 1;
+    public EnemyMovement enemy;
 
     private void Awake()
     {
-        Destroy(gameObject, 3f);
+        
     }
 
     // Use this for initialization
@@ -29,6 +31,13 @@ public class BulletController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Enemy")
+        {
+            other.GetComponent<EnemyHealthManager>().giveDamage(damageGiven);
+            //enemy.hitLocation = transform.localPosition;
+            Debug.Log(transform.localPosition);
+            Destroy(gameObject);
+        }
+        else if (other.tag == "Destroyable")
         {
             Destroy(other.gameObject);
             Destroy(gameObject);

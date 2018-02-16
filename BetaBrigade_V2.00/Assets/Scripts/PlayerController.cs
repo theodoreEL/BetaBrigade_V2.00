@@ -18,6 +18,11 @@ public class PlayerController: MonoBehaviour {
     private Vector3 shootPos;
     //Vector2 prevDir = Vector2.right;
 
+    public float knockback;
+    public float knockbackLength;
+    public float knockbackCount;
+    private Vector3 hitLocation;
+
     // This creates the multiple characters. The 3 we decided to start with are the artist, boombox, and segway squid
     GameObject artist, boomBox, segway, eighty, snek;
     int characterselect;
@@ -68,7 +73,12 @@ public class PlayerController: MonoBehaviour {
             vertMoveVelocity = -moveSpeed;
         }
 
-        playerRigidBody.velocity = new Vector2(horizMoveVelocity, vertMoveVelocity);
+        if (knockbackCount <= 0)
+            playerRigidBody.velocity = new Vector2(horizMoveVelocity, vertMoveVelocity);
+        else
+        {
+
+        }
 
         shootHoriz = Input.GetAxisRaw("FireHoriz");
         shootVert = Input.GetAxisRaw("FireVert");
