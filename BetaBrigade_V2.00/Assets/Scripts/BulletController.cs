@@ -47,6 +47,10 @@ public class BulletController : MonoBehaviour {
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
+        else
+        {
+            Destroy(gameObject);
+        }
        
     }
 
