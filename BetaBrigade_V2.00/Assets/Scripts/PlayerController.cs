@@ -48,6 +48,14 @@ public class PlayerController: MonoBehaviour {
         horizMoveVelocity = 0f;
         vertMoveVelocity = 0f;
 
+        float h = Input.GetAxisRaw("Horizontal");
+        float v = Input.GetAxisRaw("Vertical");
+        horizMoveVelocity = h * moveSpeed;
+        vertMoveVelocity = v * moveSpeed;
+        Debug.Log(h);
+        Debug.Log(v);
+
+
         if (Input.GetKey(KeyCode.D))
         {
             horizMoveVelocity = moveSpeed;
@@ -67,6 +75,26 @@ public class PlayerController: MonoBehaviour {
         {
             vertMoveVelocity = -moveSpeed;
         }
+
+        //if (Input.GetAxis("Horizontal") == 1)
+        //{
+        //    horizMoveVelocity = moveSpeed;
+        //}
+
+        //if (Input.GetAxis("Horizontal") == -1)
+        //{
+        //    horizMoveVelocity = -moveSpeed;
+        //}
+
+        //if (Input.GetAxis("Vertical") == 1)
+        //{
+        //    vertMoveVelocity = moveSpeed;
+        //}
+
+        //if (Input.GetAxis("Vertical") == -1)
+        //{
+        //    vertMoveVelocity = -moveSpeed;
+        //}
 
         playerRigidBody.velocity = new Vector2(horizMoveVelocity, vertMoveVelocity);
 
