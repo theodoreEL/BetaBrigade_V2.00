@@ -9,6 +9,8 @@ TagManager:
   - Projectile
   - Door
   - Destroyable
+  - Pickup
+  - LockedDoor
   layers:
   - Default
   - TransparentFX

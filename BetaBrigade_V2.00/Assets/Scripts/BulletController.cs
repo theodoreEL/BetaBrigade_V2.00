@@ -42,7 +42,7 @@ public class BulletController : MonoBehaviour {
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
-        else if (other.tag == "Projectile")
+        else if (other.tag == "Projectile" || other.tag == "Pickup")
             return;
         else
             Destroy(gameObject);

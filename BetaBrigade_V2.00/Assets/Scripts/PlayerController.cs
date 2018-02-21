@@ -16,6 +16,8 @@ public class PlayerController: MonoBehaviour {
     private float shootVert;
     private float offset = 1.15f;
     private Vector3 shootPos;
+    public bool hasKey = false;
+    private GameObject key;
     //Vector2 prevDir = Vector2.right;
 
     public float knockback;
@@ -43,6 +45,7 @@ public class PlayerController: MonoBehaviour {
     void Start () {
         wait = false;
         playerRigidBody = GetComponent<Rigidbody2D>();
+        key = GameObject.FindWithTag("Pickup");
     }
 
     // Update is called once per frame
@@ -79,19 +82,22 @@ public class PlayerController: MonoBehaviour {
         {
 
         }
-
-        shootHoriz = Input.GetAxisRaw("FireHoriz");
-        shootVert = Input.GetAxisRaw("FireVert");
-        bullet.direction = new Vector2(shootHoriz, shootVert);
-        shootPos = new Vector3(transform.position.x + offset * shootHoriz, transform.position.y + offset * shootVert, 0);
-        if ((shootHoriz != 0 || shootVert != 0) && !wait)
+        if (!hasKey)
         {
-            wait = true;
-            Instantiate(bullet, shootPos, transform.rotation);
-            Invoke("ShotBullet", .1f);
+            shootHoriz = Input.GetAxisRaw("FireHoriz");
+            shootVert = Input.GetAxisRaw("FireVert");
+            bullet.direction = new Vector2(shootHoriz, shootVert);
+            shootPos = new Vector3(transform.position.x + offset * shootHoriz, transform.position.y + offset * shootVert, 0);
+            if ((shootHoriz != 0 || shootVert != 0) && !wait)
+            {
+                wait = true;
+                Instantiate(bullet, shootPos, transform.rotation);
+                Invoke("ShotBullet", .1f);
 
+            }
         }
     }
+        
 
     void Update()
     {
@@ -101,6 +107,15 @@ public class PlayerController: MonoBehaviour {
             cooldown--;
         }
 
+        if (hasKey)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                key.transform.parent = null;
+                hasKey = false;
+            }
+                
+        }
         // Increments the character number using the Jump button which is the Space Bar
         if (Input.GetButtonDown("Jump"))
         {
