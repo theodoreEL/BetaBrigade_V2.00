@@ -11,6 +11,9 @@ TagManager:
   - Destroyable
   - Pickup
   - LockedDoor
+  - WestCryo
+  - EastCryo
+  - SouthCryo
   layers:
   - Default
   - TransparentFX

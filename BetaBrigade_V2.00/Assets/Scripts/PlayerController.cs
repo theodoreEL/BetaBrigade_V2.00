@@ -18,7 +18,16 @@ public class PlayerController: MonoBehaviour {
     private Vector3 shootPos;
     public bool hasKey = false;
     private GameObject key;
+    [HideInInspector]
+    public bool eastSideCryo = false;
+    [HideInInspector]
+    public bool westSideCryo = false;
+    [HideInInspector]
+    public bool southSideCryo = false;
     //Vector2 prevDir = Vector2.right;
+    private GameObject westSpawner;
+    private GameObject eastSpawner;
+    private GameObject southSpawner;
 
     public float knockback;
     public float knockbackLength;
@@ -32,6 +41,8 @@ public class PlayerController: MonoBehaviour {
 
     private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+
         cooldown = 0;
         characterselect = 1;
         artist = GameObject.Find("artistCharacter"); // The artist character
@@ -43,6 +54,21 @@ public class PlayerController: MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        westSpawner = GameObject.Find("WestCryo");
+        eastSpawner = GameObject.Find("EastCryo");
+        southSpawner = GameObject.Find("SouthCryo");
+        if (westSideCryo)
+        {
+            transform.position = westSpawner.transform.position;
+        }
+        if (eastSideCryo)
+        {
+            transform.position = eastSpawner.transform.position;
+        }
+        if (southSideCryo)
+        {
+            transform.position = southSpawner.transform.position;
+        }
         wait = false;
         playerRigidBody = GetComponent<Rigidbody2D>();
         key = GameObject.FindWithTag("Pickup");
