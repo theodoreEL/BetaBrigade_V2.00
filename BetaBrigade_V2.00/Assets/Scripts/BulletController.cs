@@ -24,7 +24,7 @@ public class BulletController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         bullet.velocity = direction * speed;
-	}
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {

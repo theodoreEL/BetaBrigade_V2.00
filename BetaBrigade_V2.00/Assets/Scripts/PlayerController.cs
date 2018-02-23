@@ -15,7 +15,7 @@ public class PlayerController: MonoBehaviour {
     private float shootHoriz;
     private float shootVert;
     private float offset = 1.15f;
-    private Vector3 shootPos;
+    private Vector2 shootPos;
     //Vector2 prevDir = Vector2.right;
 
     // This creates the multiple characters. The 3 we decided to start with are the artist, boombox, and segway squid
@@ -48,12 +48,10 @@ public class PlayerController: MonoBehaviour {
         horizMoveVelocity = 0f;
         vertMoveVelocity = 0f;
 
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
-        horizMoveVelocity = h * moveSpeed;
-        vertMoveVelocity = v * moveSpeed;
-        Debug.Log(h);
-        Debug.Log(v);
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
+
+        eightDirect(h, v);
 
 
         if (Input.GetKey(KeyCode.D))
@@ -76,38 +74,102 @@ public class PlayerController: MonoBehaviour {
             vertMoveVelocity = -moveSpeed;
         }
 
-        //if (Input.GetAxis("Horizontal") == 1)
-        //{
-        //    horizMoveVelocity = moveSpeed;
-        //}
-
-        //if (Input.GetAxis("Horizontal") == -1)
-        //{
-        //    horizMoveVelocity = -moveSpeed;
-        //}
-
-        //if (Input.GetAxis("Vertical") == 1)
-        //{
-        //    vertMoveVelocity = moveSpeed;
-        //}
-
-        //if (Input.GetAxis("Vertical") == -1)
-        //{
-        //    vertMoveVelocity = -moveSpeed;
-        //}
-
         playerRigidBody.velocity = new Vector2(horizMoveVelocity, vertMoveVelocity);
 
         shootHoriz = Input.GetAxisRaw("FireHoriz");
         shootVert = Input.GetAxisRaw("FireVert");
-        bullet.direction = new Vector2(shootHoriz, shootVert);
-        shootPos = new Vector3(transform.position.x + offset * shootHoriz, transform.position.y + offset * shootVert, 0);
+        float shootH = Input.GetAxisRaw("FireH");
+        float shootV = Input.GetAxisRaw("FireV");
         if ((shootHoriz != 0 || shootVert != 0) && !wait)
         {
+            bullet.direction = new Vector2(shootHoriz, shootVert);
+            shootPos = new Vector2(transform.position.x + offset * shootHoriz, transform.position.y + offset * shootVert);
             wait = true;
             Instantiate(bullet, shootPos, transform.rotation);
             Invoke("ShotBullet", .1f);
 
+        }
+        if ((shootH != 0 || shootV != 0) && !wait)
+        {
+            bullet.direction = new Vector2(shootH, shootV);
+
+            if (shootH == 1)
+            {
+                shootH = bullet.direction.normalized.x;
+                shootV = 0;
+                shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                wait = true;
+                Instantiate(bullet, shootPos, transform.rotation);
+                Invoke("ShotBullet", .1f);
+            }
+            if (shootH == -1)
+            {
+                shootH = bullet.direction.normalized.x;
+                shootV = 0;
+                shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                wait = true;
+                Instantiate(bullet, shootPos, transform.rotation);
+                Invoke("ShotBullet", .1f);
+            }
+            if (shootV == 1)
+            {
+                shootV = bullet.direction.normalized.y;
+                shootH = 0;
+                shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                wait = true;
+                Instantiate(bullet, shootPos, transform.rotation);
+                Invoke("ShotBullet", .1f);
+            }
+            if (shootV == -1)
+            {
+                shootV = bullet.direction.normalized.y;
+                shootH = 0;
+                shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                wait = true;
+                Instantiate(bullet, shootPos, transform.rotation);
+                Invoke("ShotBullet", .1f);
+            }
+
+            if (shootH < 1 && shootH > 0 && shootV > 0 && shootV < 1)
+            {
+                bullet.direction = new Vector2(Mathf.Sqrt(2) / 2, Mathf.Sqrt(2) / 2);
+                shootH = bullet.direction.normalized.x;
+                shootV = bullet.direction.normalized.y;
+                shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                wait = true;
+                Instantiate(bullet, shootPos, transform.rotation);
+                Invoke("ShotBullet", .1f);
+            }
+            if (shootH > -1 && shootH < 0 && shootV > 0 && shootV < 1)
+            {
+                bullet.direction = new Vector2(-Mathf.Sqrt(2) / 2, Mathf.Sqrt(2) / 2);
+                shootH = bullet.direction.normalized.x;
+                shootV = bullet.direction.normalized.y;
+                shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                wait = true;
+                Instantiate(bullet, shootPos, transform.rotation);
+                Invoke("ShotBullet", .1f);
+            }
+            if (shootH > -1 && shootH < 0 && shootV < 0 && shootV > -1)
+            {
+                bullet.direction = new Vector2(-Mathf.Sqrt(2) / 2, -Mathf.Sqrt(2) / 2);
+                shootH = bullet.direction.normalized.x;
+                shootV = bullet.direction.normalized.y;
+                shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                wait = true;
+                Instantiate(bullet, shootPos, transform.rotation);
+                Invoke("ShotBullet", .1f);
+            }
+            if (shootH < 1 && shootH > 0 && shootV < 0 && shootV > -1)
+            {
+                bullet.direction = new Vector2(Mathf.Sqrt(2) / 2, -Mathf.Sqrt(2) / 2);
+                shootH = bullet.direction.normalized.x;
+                shootV = bullet.direction.normalized.y;
+                shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                wait = true;
+                Instantiate(bullet, shootPos, transform.rotation);
+                Invoke("ShotBullet", .1f);
+            }
         }
     }
 
@@ -197,6 +259,54 @@ public class PlayerController: MonoBehaviour {
     {
         wait = false;
     }
+
+    void eightDirect(float h, float v)
+    {
+        Vector2 angle = new Vector2(h, v);
+
+        if (h == 1)
+        {
+            horizMoveVelocity = angle.normalized.x * moveSpeed;
+        }
+        if (h == -1)
+        {
+            horizMoveVelocity = angle.normalized.x * moveSpeed;
+        }
+        if (v == 1)
+        {
+            vertMoveVelocity = angle.normalized.y * moveSpeed;
+        }
+        if (v == -1)
+        {
+            vertMoveVelocity = angle.normalized.y * moveSpeed;
+        }
+
+        if (h < 1 && h > 0 && v > 0 && v < 1)
+        {
+            angle = new Vector2(Mathf.Sqrt(2) / 2, Mathf.Sqrt(2) / 2);
+            horizMoveVelocity = angle.normalized.x * moveSpeed;
+            vertMoveVelocity = angle.normalized.y * moveSpeed;
+        }
+        if (h > -1 && h < 0 && v > 0 && v < 1)
+        {
+            angle = new Vector2(-Mathf.Sqrt(2) / 2, Mathf.Sqrt(2) / 2);
+            horizMoveVelocity = angle.normalized.x * moveSpeed;
+            vertMoveVelocity = angle.normalized.y * moveSpeed;
+        }
+        if (h > -1 && h < 0 && v < 0 && v > -1)
+        {
+            angle = new Vector2(-Mathf.Sqrt(2) / 2, -Mathf.Sqrt(2) / 2);
+            horizMoveVelocity = angle.normalized.x * moveSpeed;
+            vertMoveVelocity = angle.normalized.y * moveSpeed;
+        }
+        if (h < 1 && h > 0 && v < 0 && v > -1)
+        {
+            angle = new Vector2(Mathf.Sqrt(2) / 2, -Mathf.Sqrt(2) / 2);
+            horizMoveVelocity = angle.normalized.x * moveSpeed;
+            vertMoveVelocity = angle.normalized.y * moveSpeed;
+        }
+    }
+
 }
 
 
