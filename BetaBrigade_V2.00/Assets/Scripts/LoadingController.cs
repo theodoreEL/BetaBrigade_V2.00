@@ -27,7 +27,7 @@ public class LoadingController : MonoBehaviour {
     //loading next scene method
     IEnumerator LoadNextScene()
     {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Boss Room 1");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Loading Screen");
 
         while (!asyncLoad.isDone)
         {
