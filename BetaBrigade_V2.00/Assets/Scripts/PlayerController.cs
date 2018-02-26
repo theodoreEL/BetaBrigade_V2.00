@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController: MonoBehaviour {
 
@@ -52,23 +53,39 @@ public class PlayerController: MonoBehaviour {
         snek = GameObject.Find("snakeGunner"); // The snake with a gun
     }
 
-    // Use this for initialization
-    void Start () {
-        westSpawner = GameObject.Find("WestCryo");
-        eastSpawner = GameObject.Find("EastCryo");
-        southSpawner = GameObject.Find("SouthCryo");
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
+
+    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    {
         if (westSideCryo)
         {
-            transform.position = westSpawner.transform.position;
+            transform.position = GameObject.FindGameObjectWithTag("WestCryo").transform.position;
+            westSideCryo = false;
         }
         if (eastSideCryo)
         {
-            transform.position = eastSpawner.transform.position;
+            transform.position = GameObject.FindGameObjectWithTag("EastCryo").transform.position;
+            eastSideCryo = false;
         }
         if (southSideCryo)
         {
-            transform.position = southSpawner.transform.position;
+            transform.position = GameObject.FindGameObjectWithTag("SouthCryo").transform.position;
+            southSideCryo = false;
         }
+        Debug.Log("Level Loaded");
+        Debug.Log(scene.name);
+        Debug.Log(mode);
+    }
+    // Use this for initialization
+    void Start () {
         wait = false;
         playerRigidBody = GetComponent<Rigidbody2D>();
         key = GameObject.FindWithTag("Pickup");
@@ -127,6 +144,7 @@ public class PlayerController: MonoBehaviour {
 
     void Update()
     {
+
         // A cooldown tier for swithcing characters.
         if (cooldown > 0)
         {
