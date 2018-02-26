@@ -5,16 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController: MonoBehaviour {
 
-    public float moveSpeed;
+    public struct Character
+    {
+        public GameObject character;
+        public bool isActive;
+        public Character(GameObject person, bool enabled)
+        {
+            character = person;
+            isActive = enabled;
+        }
+    }
+
+    Character[] characters = new Character[6];
     private bool wait;
-    private float horizMoveVelocity;
-    private float vertMoveVelocity;
+    private float horizMoveVelocity, vertMoveVelocity, moveSpeed, shootHoriz, shootVert;
     private Rigidbody2D playerRigidBody;
     //public Transform firePosition;
     public BulletController bullet;
     public Transform bulletProj;
-    private float shootHoriz;
-    private float shootVert;
     private float offset = 1.15f;
     private Vector3 shootPos;
     public bool hasKey = false;
@@ -25,18 +33,10 @@ public class PlayerController: MonoBehaviour {
     public bool westSideCryo = false;
     [HideInInspector]
     public bool southSideCryo = false;
-    //Vector2 prevDir = Vector2.right;
-    private GameObject westSpawner;
-    private GameObject eastSpawner;
-    private GameObject southSpawner;
-
-    public float knockback;
-    public float knockbackLength;
-    public float knockbackCount;
-    private Vector3 hitLocation;
-
+    
+   
     // This creates the multiple characters. The 3 we decided to start with are the artist, boombox, and segway squid
-    GameObject artist, boomBox, segway, eighty, snek;
+    Character artist, boomBox, segway, eighty, snek;
     int characterselect;
     int cooldown;
 
@@ -45,14 +45,20 @@ public class PlayerController: MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 
         cooldown = 0;
-        characterselect = 1;
-        artist = GameObject.Find("artistCharacter"); // The artist character
-        boomBox = GameObject.Find("boomBoxCharacter"); // The boombox character
-        segway = GameObject.Find("segwaySquid"); // The segway character
-        eighty = GameObject.Find("nerfGun"); // The eighty's guy character
-        snek = GameObject.Find("snakeGunner"); // The snake with a gun
+        characterselect = 0;
+        artist = new Character(GameObject.Find("artistCharacter"), true); // The artist character
+        boomBox = new Character(GameObject.Find("boomBoxCharacter"), false); // The boombox character
+        segway = new Character(GameObject.Find("segwaySquid"), false); // The segway character
+        eighty = new Character(GameObject.Find("nerfGun"), false); // The eighty's guy character
+        snek = new Character(GameObject.Find("snakeGunner"), false); // The snake with a gun
+        characters[0] = artist;
+        characters[1] = boomBox;
+        characters[2] = segway;
+        characters[3] = eighty;
+        characters[4] = snek;
     }
 
+    //OnEnable, OnDisable, and OnLevelFinishedLoading new way for unity's old OnLevelLoad function or w/e, places player at location inside cryoroom when entering it compared to the door that they entered
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
@@ -119,13 +125,7 @@ public class PlayerController: MonoBehaviour {
             vertMoveVelocity = -moveSpeed;
         }
 
-        if (knockbackCount <= 0)
-            playerRigidBody.velocity = new Vector2(horizMoveVelocity, vertMoveVelocity);
-        else
-        {
-
-        }
-        if (!hasKey)
+        if (!hasKey) //as long as character doesn't have a key, they can shoot
         {
             shootHoriz = Input.GetAxisRaw("FireHoriz");
             shootVert = Input.GetAxisRaw("FireVert");
@@ -163,7 +163,12 @@ public class PlayerController: MonoBehaviour {
         // Increments the character number using the Jump button which is the Space Bar
         if (Input.GetButtonDown("Jump"))
         {
-            if (characterselect == 1 && cooldown < 1)
+            if (characterselect == 0 && cooldown < 1)
+            {
+                characterselect = 1;
+                cooldown = 300;
+            }
+            else if (characterselect == 1 && cooldown < 1)
             {
                 characterselect = 2;
                 cooldown = 300;
@@ -180,17 +185,18 @@ public class PlayerController: MonoBehaviour {
             }
             else if (characterselect == 4 && cooldown < 1)
             {
-                characterselect = 5;
-                cooldown = 300;
-            }
-            else if (characterselect == 5 && cooldown < 1)
-            {
-                characterselect = 1;
+                characterselect = 0;
                 cooldown = 300;
             }
 
         }
+
         // Sets the character based on the value of characterselect
+            characters[characterselect].character.SetActive(true);
+           /* else
+                characters[i].character.SetActive(false);*/
+        }
+        /*
         if (characterselect == 1)
         {
             artist.SetActive(true);
@@ -232,8 +238,9 @@ public class PlayerController: MonoBehaviour {
             boomBox.SetActive(false);
             segway.SetActive(false);
         }
+        */
     }
-
+    
     void ShotBullet()
     {
         wait = false;
