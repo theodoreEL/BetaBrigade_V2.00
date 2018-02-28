@@ -7,18 +7,20 @@ public class PlayerController: MonoBehaviour {
 
     public struct Character
     {
-        public GameObject character;
         public bool isActive;
+        public GameObject character;
+        public Sprite charSprite;
         public Character(GameObject person, bool enabled)
         {
             character = person;
             isActive = enabled;
+            charSprite = person.GetComponent<SpriteRenderer>().sprite;
         }
-    }
+    };
 
-    Character[] characters = new Character[6];
     private bool wait;
-    private float horizMoveVelocity, vertMoveVelocity, moveSpeed, shootHoriz, shootVert;
+    public float moveSpeed;
+    private float horizMoveVelocity, vertMoveVelocity, shootHoriz, shootVert;
     private Rigidbody2D playerRigidBody;
     //public Transform firePosition;
     public BulletController bullet;
@@ -33,10 +35,15 @@ public class PlayerController: MonoBehaviour {
     public bool westSideCryo = false;
     [HideInInspector]
     public bool southSideCryo = false;
-    
-   
+
+
     // This creates the multiple characters. The 3 we decided to start with are the artist, boombox, and segway squid
+    [HideInInspector]
+    public Character[] characters = new Character[5];
     Character artist, boomBox, segway, eighty, snek;
+    //GameObject artist, boomBox, segway, eighty, snek;
+    //[HideInInspector]
+    //public GameObject[] characters = new GameObject[5];
     int characterselect;
     int cooldown;
 
@@ -47,10 +54,10 @@ public class PlayerController: MonoBehaviour {
         cooldown = 0;
         characterselect = 0;
         artist = new Character(GameObject.Find("artistCharacter"), true); // The artist character
-        boomBox = new Character(GameObject.Find("boomBoxCharacter"), false); // The boombox character
-        segway = new Character(GameObject.Find("segwaySquid"), false); // The segway character
-        eighty = new Character(GameObject.Find("nerfGun"), false); // The eighty's guy character
-        snek = new Character(GameObject.Find("snakeGunner"), false); // The snake with a gun
+        boomBox = new Character(GameObject.Find("boomBoxCharacter"), true); // The boombox character
+        segway = new Character(GameObject.Find("segwaySquid"), true); // The segway character
+        eighty = new Character(GameObject.Find("nerfGun"), true); // The eighty's guy character
+        snek = new Character(GameObject.Find("snakeGunner"), true); // The snake with a gun
         characters[0] = artist;
         characters[1] = boomBox;
         characters[2] = segway;
@@ -125,6 +132,8 @@ public class PlayerController: MonoBehaviour {
             vertMoveVelocity = -moveSpeed;
         }
 
+        playerRigidBody.velocity = new Vector2(horizMoveVelocity, vertMoveVelocity);
+
         if (!hasKey) //as long as character doesn't have a key, they can shoot
         {
             shootHoriz = Input.GetAxisRaw("FireHoriz");
@@ -145,7 +154,7 @@ public class PlayerController: MonoBehaviour {
     void Update()
     {
 
-        // A cooldown tier for swithcing characters.
+        // A cooldown tier for switching characters.
         if (cooldown > 0)
         {
             cooldown--;
@@ -190,55 +199,21 @@ public class PlayerController: MonoBehaviour {
             }
 
         }
-
+        
         // Sets the character based on the value of characterselect
-            characters[characterselect].character.SetActive(true);
-           /* else
-                characters[i].character.SetActive(false);*/
-        }
-        /*
-        if (characterselect == 1)
+        for(int i = 0; i < characters.Length; i++)
         {
-            artist.SetActive(true);
-            snek.SetActive(false);
-            segway.SetActive(false);
-            eighty.SetActive(false);
-            boomBox.SetActive(false);
+            if (characterselect == i)
+            {
+                characters[i].character.SetActive(true);
+                characters[i].isActive = true;
+            }
+            else
+            {
+                characters[i].character.SetActive(false);
+                characters[i].isActive = false;
+            }
         }
-        else if (characterselect == 2)
-        {
-            artist.SetActive(false);
-            boomBox.SetActive(true);
-            snek.SetActive(false);
-            eighty.SetActive(false);
-            segway.SetActive(false);
-
-        }
-        else if (characterselect == 3)
-        {
-            boomBox.SetActive(false);
-            segway.SetActive(true);
-            artist.SetActive(false);
-            eighty.SetActive(false);
-            snek.SetActive(false);
-        }
-        else if (characterselect == 4)
-        {
-            segway.SetActive(false);
-            eighty.SetActive(true);
-            artist.SetActive(false);
-            snek.SetActive(false);
-            boomBox.SetActive(false);
-        }
-        else if (characterselect == 5)
-        {
-            eighty.SetActive(false);
-            snek.SetActive(true);
-            artist.SetActive(false);
-            boomBox.SetActive(false);
-            segway.SetActive(false);
-        }
-        */
     }
     
     void ShotBullet()
