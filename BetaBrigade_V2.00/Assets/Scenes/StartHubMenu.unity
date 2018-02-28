@@ -396,6 +396,23 @@ GameObject:
   m_PrefabParentObject: {fileID: 1758979916547856, guid: 794609efbd1d43a4986b30c85d564813,
     type: 2}
   m_PrefabInternal: {fileID: 261813415}
+--- !u!95 &206250756
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 206250751}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2e13045bd8e0fab47be527632db836bb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &206250757
 MonoBehaviour:
   m_ObjectHideFlags: 0

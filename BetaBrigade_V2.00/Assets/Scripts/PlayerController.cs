@@ -23,10 +23,13 @@ public class PlayerController: MonoBehaviour {
     int characterselect;
     int cooldown;
 
+    //Animation
+    private Animator anim;
+
     private void Awake()
     {
         cooldown = 0;
-        characterselect = 1;
+        characterselect = 4;
         artist = GameObject.Find("artistCharacter"); // The artist character
         boomBox = GameObject.Find("boomBoxCharacter"); // The boombox character
         segway = GameObject.Find("segwaySquid"); // The segway character
@@ -38,6 +41,7 @@ public class PlayerController: MonoBehaviour {
     void Start () {
         wait = false;
         playerRigidBody = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -57,21 +61,33 @@ public class PlayerController: MonoBehaviour {
         if (Input.GetKey(KeyCode.D))
         {
             horizMoveVelocity = moveSpeed;
+            anim.SetTrigger("Walk Right");
+            anim.SetBool("ON", true);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
             horizMoveVelocity = -moveSpeed;
+            anim.SetTrigger("Walk Left");
+            anim.SetBool("ON", true);
         }
 
         if (Input.GetKey(KeyCode.W))
         {
             vertMoveVelocity = moveSpeed;
+            anim.SetTrigger("Walk Up");
+            anim.SetBool("ON", true);
         }
 
         if (Input.GetKey(KeyCode.S))
         {
             vertMoveVelocity = -moveSpeed;
+            anim.SetTrigger("Walk Down");
+            anim.SetBool("ON", true);
+        }
+        else
+        {
+            anim.SetBool("ON", false);
         }
 
         playerRigidBody.velocity = new Vector2(horizMoveVelocity, vertMoveVelocity);
