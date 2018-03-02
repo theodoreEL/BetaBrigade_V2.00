@@ -10,6 +10,22 @@ public class GameControl : MonoBehaviour {
 
 
     // Use this for initialization
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
+
+    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode = LoadSceneMode.Single)
+    {
+
+    }
+
     void Awake () {
 		if (control == null)
         {
@@ -20,21 +36,6 @@ public class GameControl : MonoBehaviour {
             Destroy(gameObject);
         }
 
-    }
-	
-    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode = LoadSceneMode.Single)
-    {
-        
-    }
-
-    void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnLevelFinishedLoading;
-    }
-
-    void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
     }
 
 	// Update is called once per frame
