@@ -7,19 +7,26 @@ using UnityEngine.SceneManagement;
 
 public class LevelManagerTest : MonoBehaviour
 {
-    public string nextLevel;
+	public string[] levelsInOrder; //MUST BE STORED IN GAME ORDER
+	static public int levelNumber;
+	
 
     void Start()
     {
-        StartCoroutine(LoadNextScene());
-    }
+		string nextLevel;
+		nextLevel = levelsInOrder[levelNumber];
+		StartCoroutine(LoadNextScene(nextLevel));
+		levelNumber = levelNumber + 1;
 
-    IEnumerator LoadNextScene()
+	}
+
+    IEnumerator LoadNextScene(string levelName)
     {
         yield return new WaitForSeconds(5);
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Boss Room 1");
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(levelName);
 
-        while (!asyncLoad.isDone)
+
+		while (!asyncLoad.isDone)
         {
             yield return null;
         }

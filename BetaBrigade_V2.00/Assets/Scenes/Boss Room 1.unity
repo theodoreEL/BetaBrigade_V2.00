@@ -1145,16 +1145,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemDrops:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1349989327428024, guid: ac203a08bd778bc4e9fe6a90f0f61080, type: 2}
+  - {fileID: 1868713146277228, guid: d2c22b63cba8b0a46a12578b7f1c2480, type: 2}
+  - {fileID: 1505820022569648, guid: 02c5ed0f795ebd745b04ed720f755f38, type: 2}
+  - {fileID: 1800375569032386, guid: 9112f93d40919f2499992c89a52ee75a, type: 2}
+  tempHealth: 240
 --- !u!1001 &2041670992
 Prefab:
   m_ObjectHideFlags: 0

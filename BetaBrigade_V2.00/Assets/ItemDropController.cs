@@ -5,9 +5,9 @@ using UnityEngine;
 public class ItemDropController : MonoBehaviour {
 
 	//GAME OBJECT Array to store the items that can be dropped
-	public GameObject[] itemDrops = new GameObject[10];
+	public GameObject[] itemDrops;
 
-
+	public int tempHealth; //USED TO TEST DROP FUNCTION WITHOUT THE HEALTH FUNCTIONALITY
 	// Use this for initialization
 	void Start () {
 		
@@ -16,16 +16,19 @@ public class ItemDropController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		/* if (health is <= 0)
+		tempHealth = tempHealth - 1;
+
+		if (tempHealth <= 0)
 			{
 				dropItem();
-			}*/
+			}
 	}
+
 
 	void dropItem()
 	{
 		//gernerate a random number
-		int itemNumber = Random.Range(0, 10);
+		int itemNumber = Random.Range(0, itemDrops.Length);
 		//use the random number to select an item from the array
 		GameObject itemToDrop = itemDrops[itemNumber];
 		//create the object at the bosses location
