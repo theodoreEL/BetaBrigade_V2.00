@@ -53,10 +53,10 @@ Rigidbody2D:
   m_GameObject: {fileID: 1580392015091902}
   m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 1
+  m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 1000
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -114,6 +114,7 @@ MonoBehaviour:
   right: 0
   up: 0
   down: 0
+  spotted: 0
 --- !u!212 &212715259583572918
 SpriteRenderer:
   m_ObjectHideFlags: 1

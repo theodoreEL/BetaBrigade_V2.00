@@ -4,30 +4,35 @@ using UnityEngine;
 
 public class EnemyMovement: MonoBehaviour {
 
-    public float range;
-    public GameObject Player;
+    public bool withinRange;
     public float speed;
     private float horizMoveVelocity;
     private float vertMoveVelocity;
     public bool left, right, up, down;
 
+    [SerializeField]
+    Transform Player;
+    Transform lineOfSightEnd;
+
     // Use this for initialization
     void Start () {
-        Player = GameObject.FindGameObjectWithTag("Player");
+        withinRange = false;
+        Player = GameObject.Find("Player").transform;
 
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         float step = speed * Time.deltaTime;
-		if(Vector2.Distance(Player.transform.position, transform.position) <= range)
+
+        if (PlayerIsSeen())
         {
             //transform.Translate(Vector2.MoveTowards(transform.position, -Player.position, 0) * Time.deltaTime);
             //transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, step);
 
             horizMoveVelocity = 0f;
             vertMoveVelocity = 0f;
-            Vector2 path = Player.transform.position - transform.position;
+            Vector2 path = Player.position - transform.position;
 
             if (path.x < 0)
             {
@@ -120,5 +125,88 @@ public class EnemyMovement: MonoBehaviour {
                 transform.Translate(Vector2.down * step);
             }
         }
-	}
+
+    }
+
+    bool PlayerIsSeen()
+    {
+        if (withinRange)
+        {
+            /*if (FieldOfView())
+            {
+                return (!Hidden());
+            }
+            else
+            {
+                return false;
+            }*/
+            return (!Hidden());
+        }
+        else
+        {
+            return false;
+        }
+
+    }
+
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other.transform.tag == "Player")
+        {
+            withinRange = true;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.transform.tag == "Player")
+        {
+            withinRange = false;
+        }
+    }
+
+    /*bool FieldOfView()
+    {
+        Vector2 direction = Player.position - transform.position;
+        Debug.DrawLine(transform.position, Player.position, Color.red);
+
+        Vector2 lineOfSight = lineOfSightEnd.position - transform.position;
+        Debug.DrawLine(transform.position, lineOfSightEnd.position, Color.blue);
+
+        float angle = Vector2.Angle(direction, lineOfSight);
+
+        if (angle < 65)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+    }*/
+
+    bool Hidden()
+    {
+        float distanceToPlayer = Vector2.Distance(transform.position, Player.position);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, Player.position - transform.position, distanceToPlayer);
+        Debug.DrawRay(transform.position, Player.position - transform.position, Color.green);
+        List<float> distances = new List<float>();
+
+        foreach (RaycastHit2D hit in hits)
+        {
+            if (hit.transform.tag == "Enemy")
+                continue;
+
+            if (hit.transform.tag != "Player")
+            {
+                return true;
+            }
+        }
+
+        return false;
+
+    }
+
+
 }

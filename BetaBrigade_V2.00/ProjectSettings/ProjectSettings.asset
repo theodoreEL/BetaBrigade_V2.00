@@ -588,9 +588,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 4ee8c269-2048-4d90-9067-88cd6dfae762
-  projectName: Title_V1.01-master
-  organizationId: whitmank
+  cloudProjectId: 0e90b41e-85e7-4887-b42e-2cfa666f1dfc
+  projectName: BetaBrigade_V2.00
+  organizationId: dharvana
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
