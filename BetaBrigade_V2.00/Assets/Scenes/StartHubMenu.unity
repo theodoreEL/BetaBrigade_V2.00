@@ -413,19 +413,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &206250757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 206250751}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6cd80692e6fa00469d5c1190eedf3ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attack: {fileID: 1298013350561532, guid: 01e0d28adf62dcc47bc416f5bd7a82f1, type: 2}
-  player: {fileID: 206250751}
 --- !u!1001 &261813415
 Prefab:
   m_ObjectHideFlags: 0
@@ -541,6 +528,12 @@ Prefab:
       propertyPath: m_SortingLayer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114802637706491002, guid: 794609efbd1d43a4986b30c85d564813,
+        type: 2}
+      propertyPath: melee
+      value: 
+      objectReference: {fileID: 114523586547840200, guid: eb909166172ea8749a90db19ccba921c,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 114826361148071928, guid: 794609efbd1d43a4986b30c85d564813, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 794609efbd1d43a4986b30c85d564813, type: 2}

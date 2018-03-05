@@ -11,12 +11,13 @@ public class PlayerController: MonoBehaviour {
     private Rigidbody2D playerRigidBody;
     //public Transform firePosition;
     public BulletController bullet;
+    public PlayerMeleeAttack melee;
     public Transform bulletProj;
     private float shootHoriz;
     private float shootVert;
     private float offset = 1.15f;
     private Vector2 shootPos;
-    //Vector2 prevDir = Vector2.right;
+    Vector2 meleePos;
 
     // This creates the multiple characters. The 3 we decided to start with are the artist, boombox, and segway squid
     GameObject artist, boomBox, segway, eighty, snek;
@@ -45,7 +46,8 @@ public class PlayerController: MonoBehaviour {
     }
 
     // Update is called once per frame
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         //Movement: sets moveVelocity of horizontal and vertical movement to 0 each update, unless WASD keys are pressed, then sets them to movespeed
         //and makes playerRigidbody velocity equal to velocity given by specific key pressed
 
@@ -105,85 +107,129 @@ public class PlayerController: MonoBehaviour {
             Invoke("ShotBullet", .1f);
 
         }
-        if ((shootH != 0 || shootV != 0) && !wait)
+
+        if (Input.GetKey(KeyCode.Joystick1Button7))
         {
-            bullet.direction = new Vector2(shootH, shootV);
+            if ((shootH != 0 || shootV != 0) && !wait)
+            {
+                bullet.direction = new Vector2(shootH, shootV);
 
-            if (shootH == 1)
-            {
-                shootH = bullet.direction.normalized.x;
-                shootV = 0;
-                shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
-                wait = true;
-                Instantiate(bullet, shootPos, transform.rotation);
-                Invoke("ShotBullet", .1f);
-            }
-            if (shootH == -1)
-            {
-                shootH = bullet.direction.normalized.x;
-                shootV = 0;
-                shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
-                wait = true;
-                Instantiate(bullet, shootPos, transform.rotation);
-                Invoke("ShotBullet", .1f);
-            }
-            if (shootV == 1)
-            {
-                shootV = bullet.direction.normalized.y;
-                shootH = 0;
-                shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
-                wait = true;
-                Instantiate(bullet, shootPos, transform.rotation);
-                Invoke("ShotBullet", .1f);
-            }
-            if (shootV == -1)
-            {
-                shootV = bullet.direction.normalized.y;
-                shootH = 0;
-                shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
-                wait = true;
-                Instantiate(bullet, shootPos, transform.rotation);
-                Invoke("ShotBullet", .1f);
-            }
+                if (shootH == 1)
+                {
+                    shootH = bullet.direction.normalized.x;
+                    shootV = 0;
+                    shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                    wait = true;
+                    Instantiate(bullet, shootPos, transform.rotation);
+                    Invoke("ShotBullet", .1f);
+                }
+                if (shootH == -1)
+                {
+                    shootH = bullet.direction.normalized.x;
+                    shootV = 0;
+                    shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                    wait = true;
+                    Instantiate(bullet, shootPos, transform.rotation);
+                    Invoke("ShotBullet", .1f);
+                }
+                if (shootV == 1)
+                {
+                    shootV = bullet.direction.normalized.y;
+                    shootH = 0;
+                    shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                    wait = true;
+                    Instantiate(bullet, shootPos, transform.rotation);
+                    Invoke("ShotBullet", .1f);
+                }
+                if (shootV == -1)
+                {
+                    shootV = bullet.direction.normalized.y;
+                    shootH = 0;
+                    shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                    wait = true;
+                    Instantiate(bullet, shootPos, transform.rotation);
+                    Invoke("ShotBullet", .1f);
+                }
 
-            if (shootH < 1 && shootH > 0 && shootV > 0 && shootV < 1)
+                if (shootH < 1 && shootH > 0 && shootV > 0 && shootV < 1)
+                {
+                    bullet.direction = new Vector2(Mathf.Sqrt(2) / 2, Mathf.Sqrt(2) / 2);
+                    shootH = bullet.direction.normalized.x;
+                    shootV = bullet.direction.normalized.y;
+                    shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                    wait = true;
+                    Instantiate(bullet, shootPos, transform.rotation);
+                    Invoke("ShotBullet", .1f);
+                }
+                if (shootH > -1 && shootH < 0 && shootV > 0 && shootV < 1)
+                {
+                    bullet.direction = new Vector2(-Mathf.Sqrt(2) / 2, Mathf.Sqrt(2) / 2);
+                    shootH = bullet.direction.normalized.x;
+                    shootV = bullet.direction.normalized.y;
+                    shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                    wait = true;
+                    Instantiate(bullet, shootPos, transform.rotation);
+                    Invoke("ShotBullet", .1f);
+                }
+                if (shootH > -1 && shootH < 0 && shootV < 0 && shootV > -1)
+                {
+                    bullet.direction = new Vector2(-Mathf.Sqrt(2) / 2, -Mathf.Sqrt(2) / 2);
+                    shootH = bullet.direction.normalized.x;
+                    shootV = bullet.direction.normalized.y;
+                    shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                    wait = true;
+                    Instantiate(bullet, shootPos, transform.rotation);
+                    Invoke("ShotBullet", .1f);
+                }
+                if (shootH < 1 && shootH > 0 && shootV < 0 && shootV > -1)
+                {
+                    bullet.direction = new Vector2(Mathf.Sqrt(2) / 2, -Mathf.Sqrt(2) / 2);
+                    shootH = bullet.direction.normalized.x;
+                    shootV = bullet.direction.normalized.y;
+                    shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                    wait = true;
+                    Instantiate(bullet, shootPos, transform.rotation);
+                    Invoke("ShotBullet", .1f);
+                }
+            }
+        }
+
+        if (Input.GetKey(KeyCode.Joystick1Button0))
+        {
+            if (h == 1)
             {
-                bullet.direction = new Vector2(Mathf.Sqrt(2) / 2, Mathf.Sqrt(2) / 2);
-                shootH = bullet.direction.normalized.x;
-                shootV = bullet.direction.normalized.y;
-                shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                shootH = melee.direction.normalized.x;
+                shootV = 0;
+                meleePos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
                 wait = true;
-                Instantiate(bullet, shootPos, transform.rotation);
+                Instantiate(melee, meleePos, transform.rotation);
                 Invoke("ShotBullet", .1f);
             }
-            if (shootH > -1 && shootH < 0 && shootV > 0 && shootV < 1)
+            if (h == -1)
             {
-                bullet.direction = new Vector2(-Mathf.Sqrt(2) / 2, Mathf.Sqrt(2) / 2);
-                shootH = bullet.direction.normalized.x;
-                shootV = bullet.direction.normalized.y;
-                shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                shootH = melee.direction.normalized.x;
+                shootV = 0;
+                meleePos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
                 wait = true;
-                Instantiate(bullet, shootPos, transform.rotation);
+                Instantiate(melee, meleePos, transform.rotation);
                 Invoke("ShotBullet", .1f);
             }
-            if (shootH > -1 && shootH < 0 && shootV < 0 && shootV > -1)
+            if (v == 1)
             {
-                bullet.direction = new Vector2(-Mathf.Sqrt(2) / 2, -Mathf.Sqrt(2) / 2);
-                shootH = bullet.direction.normalized.x;
-                shootV = bullet.direction.normalized.y;
-                shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                shootV = melee.direction.normalized.y;
+                shootH = 0;
+                meleePos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
                 wait = true;
-                Instantiate(bullet, shootPos, transform.rotation);
+                Instantiate(melee, meleePos, transform.rotation);
                 Invoke("ShotBullet", .1f);
             }
-            if (shootH < 1 && shootH > 0 && shootV < 0 && shootV > -1)
+            if (v == -1)
             {
-                bullet.direction = new Vector2(Mathf.Sqrt(2) / 2, -Mathf.Sqrt(2) / 2);
-                shootH = bullet.direction.normalized.x;
-                shootV = bullet.direction.normalized.y;
-                shootPos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
+                shootV = melee.direction.normalized.y;
+                shootH = 0;
+                meleePos = new Vector2(transform.position.x + offset * shootH, transform.position.y + offset * shootV);
                 wait = true;
-                Instantiate(bullet, shootPos, transform.rotation);
+                Instantiate(melee, meleePos, transform.rotation);
                 Invoke("ShotBullet", .1f);
             }
         }
