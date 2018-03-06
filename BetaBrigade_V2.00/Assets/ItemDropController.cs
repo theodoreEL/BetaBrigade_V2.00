@@ -29,10 +29,13 @@ public class ItemDropController : MonoBehaviour {
 	{
 		//gernerate a random number
 		int itemNumber = Random.Range(0, itemDrops.Length);
+
 		//use the random number to select an item from the array
 		GameObject itemToDrop = itemDrops[itemNumber];
+
 		//create the object at the bosses location
 		Instantiate(itemToDrop, transform.position, transform.rotation);
+
 		//destry the boss
 		Destroy(gameObject);
 	}
