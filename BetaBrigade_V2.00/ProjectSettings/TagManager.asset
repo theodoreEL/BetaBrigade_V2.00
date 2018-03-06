@@ -16,6 +16,7 @@ TagManager:
   - SouthCryo
   - OtherSpawn
   - OtherSpawnParent
+  - TempSprite
   layers:
   - Default
   - TransparentFX

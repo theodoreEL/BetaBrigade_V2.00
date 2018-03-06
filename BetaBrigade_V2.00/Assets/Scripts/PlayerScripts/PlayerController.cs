@@ -9,35 +9,31 @@ public class PlayerController: MonoBehaviour {
     {
         public bool isActive;
         public GameObject character;
-        public Sprite charSprite;
+        public SpriteRenderer charSprite;
         public Character(GameObject person, bool enabled)
         {
             character = person;
             isActive = enabled;
-            charSprite = person.GetComponent<SpriteRenderer>().sprite;
+            charSprite = person.GetComponent<SpriteRenderer>();
         }
     };
 
+    private const string BACKGROUND = "Default";
+    private const string FOREGROUND = "Foreground";
     private bool wait;
     public float moveSpeed;
     private float horizMoveVelocity, vertMoveVelocity, shootHoriz, shootVert;
     private Rigidbody2D playerRigidBody;
     public BulletController bullet;
-    public Transform bulletProj;
     private float offset = 1.15f;
     private Vector3 shootPos;
     public bool hasKey = false;
     private GameObject key;
     [HideInInspector]
-    public bool eastSideCryo = false;
-    [HideInInspector]
-    public bool westSideCryo = false;
-    [HideInInspector]
-    public bool southSideCryo = false;
-    [HideInInspector]
-    public bool switchChars = false;
+    public bool eastSideCryo = false, westSideCryo = false, southSideCryo = false;
     private int count = 0;
     private GameObject otherCharSpawners;
+    private SpriteRenderer parentSprite;
 
     // This creates the multiple characters. The 3 we decided to start with are the artist, boombox, and segway squid
     [HideInInspector]
@@ -105,7 +101,7 @@ public class PlayerController: MonoBehaviour {
         {
             if (!(characters[i].isActive))
             {
-                    otherCharSpawners.transform.GetChild(count).GetComponent<SpriteRenderer>().sprite = characters[count].charSprite;
+                    otherCharSpawners.transform.GetChild(count).GetComponent<SpriteRenderer>().sprite = characters[count].charSprite.sprite;
                     count++;
             }
         }
@@ -116,7 +112,8 @@ public class PlayerController: MonoBehaviour {
         wait = false;
         playerRigidBody = GetComponent<Rigidbody2D>();
         key = GameObject.FindWithTag("Pickup");
-
+        parentSprite = gameObject.GetComponent<SpriteRenderer>();
+        parentSprite.sprite = characters[characterselect].charSprite.sprite;
     }
 
     // Update is called once per frame
@@ -212,24 +209,21 @@ public class PlayerController: MonoBehaviour {
                 characterselect = 0;
                 cooldown = 300;
             }
-
         }
 
         // Sets the character based on the value of characterselect
-        if (!switchChars)
+        parentSprite.sprite = characters[characterselect].charSprite.sprite;
+        for (int i = 0; i < characters.Length; i++)
         {
-            for (int i = 0; i < characters.Length; i++)
+            if (characterselect == i)
             {
-                if (characterselect == i)
-                {
-                    characters[i].character.SetActive(true);
-                    characters[i].isActive = true;
-                }
-                else
-                {
-                    characters[i].character.SetActive(false);
-                    characters[i].isActive = false;
-                }
+                characters[i].character.SetActive(true);
+                characters[i].isActive = true;
+            }
+            else
+            {
+                characters[i].character.SetActive(false);
+                characters[i].isActive = false;
             }
         }
     }

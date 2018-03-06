@@ -9,29 +9,24 @@ public class SwitchingChars : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-
     }
 	
 	// Update is called once per frame
 	void Update () {
-		if(player.switchChars)
-            switchTime += Time.deltaTime;
-        if(switchTime >= 1)
-            player.switchChars = false;
+
     }
 
     void OnTriggerStay2D(Collider2D other)
     {
         if(other.tag == "OtherSpawn" && Input.GetKeyDown(KeyCode.F))
         {
-            player.switchChars = true;
             for(int i = 0; i < player.characters.Length; i++)
             {
                 Debug.Log("you've made it here");
                 player.characters[i].character.SetActive(true);
-                if (other.transform.GetComponent<SpriteRenderer>().sprite == player.characters[i].charSprite)
+                if (other.transform.GetComponent<SpriteRenderer>().sprite == player.characters[i].charSprite.sprite)
                 {
-                    player.characters[i].isActive = true;
+                    other.transform.GetComponent<SpriteRenderer>().sprite = player.transform.GetComponent<SpriteRenderer>().sprite;
                     player.characterselect = i;
                     break;
                 }

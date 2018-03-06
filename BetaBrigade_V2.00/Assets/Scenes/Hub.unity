@@ -846,6 +846,18 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 50950517458799632, guid: 794609efbd1d43a4986b30c85d564813,
     type: 2}
   m_PrefabInternal: {fileID: 594300871}
+--- !u!114 &206250754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 206250751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a3051cb2fc6dd47a99c871be6cc7ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 206250752}
 --- !u!1 &281695891
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,7 +1235,23 @@ Prefab:
       propertyPath: player
       value: 
       objectReference: {fileID: 206250752}
-    m_RemovedComponents: []
+    - target: {fileID: 212413334976667512, guid: 794609efbd1d43a4986b30c85d564813,
+        type: 2}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212413334976667512, guid: 794609efbd1d43a4986b30c85d564813,
+        type: 2}
+      propertyPath: m_SortingLayerID
+      value: 118034327
+      objectReference: {fileID: 0}
+    - target: {fileID: 212413334976667512, guid: 794609efbd1d43a4986b30c85d564813,
+        type: 2}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114193417337216632, guid: 794609efbd1d43a4986b30c85d564813, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 794609efbd1d43a4986b30c85d564813, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &629500382
