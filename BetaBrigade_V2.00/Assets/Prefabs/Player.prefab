@@ -180,7 +180,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1758979916547856}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.217926, y: 0.1953125, z: 0}
+  m_LocalPosition: {x: -3.69, y: -1.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4327612994087200}
@@ -390,11 +390,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   bullet: {fileID: 114935418526146022, guid: 01e0d28adf62dcc47bc416f5bd7a82f1, type: 2}
-  bulletProj: {fileID: 0}
   hasKey: 0
   eastSideCryo: 0
   westSideCryo: 0
   southSideCryo: 0
+  hubRoom: 1
   characterselect: 0
 --- !u!114 &114860315424931916
 MonoBehaviour:

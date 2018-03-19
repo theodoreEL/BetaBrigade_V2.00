@@ -18,6 +18,7 @@ public class PlayerController: MonoBehaviour {
         }
     };
 
+    public static PlayerController player; 
     private const string BACKGROUND = "Default";
     private const string FOREGROUND = "Foreground";
     private bool wait;
@@ -30,7 +31,7 @@ public class PlayerController: MonoBehaviour {
     public bool hasKey = false;
     private GameObject key;
     [HideInInspector]
-    public bool eastSideCryo = false, westSideCryo = false, southSideCryo = false;
+    public bool eastSideCryo = false, westSideCryo = false, southSideCryo = false, hubRoom = false;
     private int count = 0;
     private GameObject otherCharSpawners;
     private SpriteRenderer parentSprite;
@@ -46,6 +47,16 @@ public class PlayerController: MonoBehaviour {
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        /*if (player == null)
+        {
+            DontDestroyOnLoad(gameObject);
+            player = this;
+        }
+        else if (player != this)
+        {
+            Destroy(gameObject);
+        }*/
+
 
         cooldown = 0;
         characterselect = 0;
@@ -59,6 +70,7 @@ public class PlayerController: MonoBehaviour {
         characters[2] = segway;
         characters[3] = eighty;
         characters[4] = snek;
+        hubRoom = false;
     }
 
     //OnEnable, OnDisable, and OnLevelFinishedLoading new way for unity's old OnLevelLoad function or w/e, places player at location inside cryoroom when entering it compared to the door that they entered
@@ -75,37 +87,52 @@ public class PlayerController: MonoBehaviour {
     
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        for(int i = 0; i < characters.Length; i++)
+        Debug.Log(eastSideCryo);
+        if (hubRoom)
         {
-            characters[i].character.SetActive(true);
+            transform.position = GameObject.FindGameObjectWithTag("Level1Spawn").transform.position;
+            Debug.Log(GameObject.FindWithTag("Level1Spawn"));
+            hubRoom = false;
         }
-        if (westSideCryo)
+        else if (westSideCryo)
         {
-            transform.position = GameObject.FindGameObjectWithTag("WestCryo").transform.position;
+            transform.position = GameObject.Find("WestSpawn").transform.position;
             westSideCryo = false;
         }
-        if (eastSideCryo)
+        else if (eastSideCryo)
         {
-            transform.position = GameObject.FindGameObjectWithTag("EastCryo").transform.position;
+            transform.position = GameObject.Find("EastSpawn").transform.position;
             eastSideCryo = false;
         }
-        if (southSideCryo)
+        else if (southSideCryo)
         {
-            transform.position = GameObject.FindGameObjectWithTag("SouthCryo").transform.position;
+            transform.position = GameObject.Find("SouthSpawn").transform.position;
+            Debug.Log(GameObject.FindWithTag("SouthCryo"));
             southSideCryo = false;
         }
 
+        for (int i = 0; i < characters.Length; i++)
+        {
+            characters[i].character.SetActive(true);
+        }
         otherCharSpawners = GameObject.FindGameObjectWithTag("OtherSpawnParent");
 
         for (int i = 0; i < characters.Length; i++)
         {
             if (!(characters[i].isActive))
             {
+                try {
                     otherCharSpawners.transform.GetChild(count).GetComponent<SpriteRenderer>().sprite = characters[count].charSprite.sprite;
+                }
+                catch
+                {
+                    break;
+                }
                     count++;
-            }
+                }
         }
         count = 0;
+        Debug.Log(hubRoom);
     }
     // Use this for initialization
     void Start () {

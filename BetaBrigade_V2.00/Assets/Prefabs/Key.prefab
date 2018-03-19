@@ -89,9 +89,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9773548281cb4d04ba3a0f7ea5974dc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRB: {fileID: 0}
-  player: {fileID: 0}
-  holdingSpot: {fileID: 0}
+  playerRB: {fileID: 50950517458799632, guid: 794609efbd1d43a4986b30c85d564813, type: 2}
+  player: {fileID: 114802637706491002, guid: 794609efbd1d43a4986b30c85d564813, type: 2}
+  holdingSpot: {fileID: 4933963084833316, guid: 794609efbd1d43a4986b30c85d564813,
+    type: 2}
 --- !u!212 &212154277360520582
 SpriteRenderer:
   m_ObjectHideFlags: 1

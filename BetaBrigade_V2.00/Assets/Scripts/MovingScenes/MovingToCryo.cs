@@ -20,17 +20,17 @@ public class MovingToCryo : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Player" && gameObject.tag == "WestCryo")
+        if(other.tag == "Player" && gameObject.name == "RoomChangeWest")
         {
             playController.westSideCryo = true;
             StartCoroutine(LoadNextScene());
         }
-        else if (other.tag == "Player" && gameObject.tag == "EastCryo")
+        else if (other.tag == "Player" && gameObject.name == "RoomChangeEast")
         {
             playController.eastSideCryo = true;
             StartCoroutine(LoadNextScene());
         }
-        else if (other.tag == "Player" && gameObject.tag == "SouthCryo")
+        else if (other.tag == "Player" && gameObject.name == "RoomChangeNorth")
         {
             playController.southSideCryo = true;
             StartCoroutine(LoadNextScene());
