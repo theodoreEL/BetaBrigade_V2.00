@@ -18,19 +18,16 @@ public class PlayerController: MonoBehaviour {
         }
     };
 
-    public static PlayerController player; 
-    private const string BACKGROUND = "Default";
-    private const string FOREGROUND = "Foreground";
     private bool wait;
     public float moveSpeed;
     private float horizMoveVelocity, vertMoveVelocity, shootHoriz, shootVert;
     private Rigidbody2D playerRigidBody;
     public BulletController bullet;
+    private int count = 0;
     private float offset = 1.15f;
     private Vector3 shootPos;
     public Transform key;
     public bool eastSideCryo, westSideCryo, southSideCryo, hubRoom, hasKey;
-    private int count = 0;
     private GameObject otherCharSpawners;
     private SpriteRenderer parentSprite;
 
@@ -70,7 +67,6 @@ public class PlayerController: MonoBehaviour {
         characters[4] = snek;
     }
 
-    //OnEnable, OnDisable, and OnLevelFinishedLoading new way for unity's old OnLevelLoad function or w/e, places player at location inside cryoroom when entering it compared to the door that they entered
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnLevelFinishedLoading;
@@ -81,8 +77,7 @@ public class PlayerController: MonoBehaviour {
         SceneManager.sceneLoaded -= OnLevelFinishedLoading;
     }
 
-    
-    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
+    void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode = LoadSceneMode.Single)
     {
         if (hubRoom)
         {
@@ -116,18 +111,20 @@ public class PlayerController: MonoBehaviour {
         {
             if (!(characters[i].isActive))
             {
-                try {
+                try
+                {
                     otherCharSpawners.transform.GetChild(count).GetComponent<SpriteRenderer>().sprite = characters[count].charSprite.sprite;
                 }
                 catch
                 {
                     break;
                 }
-                    count++;
-                }
+                count++;
+            }
         }
         count = 0;
     }
+
     // Use this for initialization
     void Start () {
         wait = false;
@@ -206,7 +203,7 @@ public class PlayerController: MonoBehaviour {
             }
                 
         }
-        // Increments the character number using the Jump button which is the Space Bar
+        // will be mana usage to switch players
         if (Input.GetButtonDown("Jump"))
         {
             if (characterselect == 0 && cooldown < 1)

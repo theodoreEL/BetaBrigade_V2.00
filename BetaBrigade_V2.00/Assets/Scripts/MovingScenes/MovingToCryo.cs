@@ -5,12 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MovingToCryo : MonoBehaviour {
 
-    private GameObject player;
     public PlayerController playController;
    
 	// Use this for initialization
 	void Start () {
-        player = GameObject.FindWithTag("Player");
+
 	}
 	
 	// Update is called once per frame

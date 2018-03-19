@@ -19,26 +19,22 @@ public class PlayerMeleeAttack : MonoBehaviour {
 
             if (angle == 0)
             {
-                GameObject myAttack = Instantiate(attack, new Vector2(transform.position.x + 1, transform.position.y
-                    ), transform.rotation);
+                Instantiate(attack, new Vector2(transform.position.x + 1, transform.position.y), transform.rotation);
                 Debug.Log("Your angle is: " + angle);
             }
             else if (angle == 90)
             {
-                GameObject myAttack = Instantiate(attack, new Vector2(transform.position.x, transform.position.y + 2
-                    ), transform.rotation);
+                Instantiate(attack, new Vector2(transform.position.x, transform.position.y + 2), transform.rotation);
                 Debug.Log("Your angle is: " + angle);
             }
             else if (angle == 180)
             {
-                GameObject myAttack = Instantiate(attack, new Vector2(transform.position.x - 1, transform.position.y
-                    ), transform.rotation);
+                Instantiate(attack, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
                 Debug.Log("Your angle is: " + angle);
             }
             else if (angle == -90)
             {
-                GameObject myAttack = Instantiate(attack, new Vector2(transform.position.x, transform.position.y - 2
-                    ), transform.rotation);
+                Instantiate(attack, new Vector2(transform.position.x, transform.position.y - 2), transform.rotation);
                 Debug.Log("Your angle is: 360");
             }
         }

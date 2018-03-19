@@ -5,7 +5,6 @@ using UnityEngine;
 public class SwitchingChars : MonoBehaviour {
 
     public PlayerController player;
-    private float switchTime = 0f;
 
     // Use this for initialization
     void Start () {
