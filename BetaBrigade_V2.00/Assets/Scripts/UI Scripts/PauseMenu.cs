@@ -14,7 +14,7 @@ public class PauseMenu : MonoBehaviour {
 	void Start () {
         pause = false;
         pMenu.SetActive(false);
-        //oMenu.SetActive(false);
+        oMenu.SetActive(false);
     }
 	
 	// Update is called once per frame
@@ -48,13 +48,21 @@ public class PauseMenu : MonoBehaviour {
 
     public void Options()
     {
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
         pMenu.SetActive(false);
+        oMenu.SetActive(true);
     }
 
     public void Exit()
     {
         Time.timeScale = 1;
         SceneManager.LoadScene("Start Menu");
+    }
+
+    public void OptionsBack()
+    {
+        Time.timeScale = 0;
+        pMenu.SetActive(true);
+        oMenu.SetActive(false);
     }
 }
