@@ -28,10 +28,8 @@ public class PlayerController: MonoBehaviour {
     public BulletController bullet;
     private float offset = 1.15f;
     private Vector3 shootPos;
-    public bool hasKey = false;
-    private GameObject key;
-    [HideInInspector]
-    public bool eastSideCryo = false, westSideCryo = false, southSideCryo = false, hubRoom = false;
+    public Transform key;
+    public bool eastSideCryo, westSideCryo, southSideCryo, hubRoom, hasKey;
     private int count = 0;
     private GameObject otherCharSpawners;
     private SpriteRenderer parentSprite;
@@ -70,7 +68,6 @@ public class PlayerController: MonoBehaviour {
         characters[2] = segway;
         characters[3] = eighty;
         characters[4] = snek;
-        hubRoom = false;
     }
 
     //OnEnable, OnDisable, and OnLevelFinishedLoading new way for unity's old OnLevelLoad function or w/e, places player at location inside cryoroom when entering it compared to the door that they entered
@@ -87,7 +84,6 @@ public class PlayerController: MonoBehaviour {
     
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
     {
-        Debug.Log(eastSideCryo);
         if (hubRoom)
         {
             transform.position = GameObject.FindGameObjectWithTag("Level1Spawn").transform.position;
@@ -107,7 +103,6 @@ public class PlayerController: MonoBehaviour {
         else if (southSideCryo)
         {
             transform.position = GameObject.Find("SouthSpawn").transform.position;
-            Debug.Log(GameObject.FindWithTag("SouthCryo"));
             southSideCryo = false;
         }
 
@@ -132,15 +127,18 @@ public class PlayerController: MonoBehaviour {
                 }
         }
         count = 0;
-        Debug.Log(hubRoom);
     }
     // Use this for initialization
     void Start () {
         wait = false;
         playerRigidBody = GetComponent<Rigidbody2D>();
-        key = GameObject.FindWithTag("Pickup");
         parentSprite = gameObject.GetComponent<SpriteRenderer>();
         parentSprite.sprite = characters[characterselect].charSprite.sprite;
+        hubRoom = false;
+        hasKey = false;
+        eastSideCryo = false;
+        westSideCryo = false;
+        southSideCryo = false;
     }
 
     // Update is called once per frame
@@ -203,7 +201,7 @@ public class PlayerController: MonoBehaviour {
         {
             if (Input.GetKeyDown(KeyCode.Q))
             {
-                key.transform.parent = null;
+                key.parent = null;
                 hasKey = false;
             }
                 

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class CollisionWithPlayer : MonoBehaviour {
 
-    public GameObject thePlayer;
 
     // Use this for initialization
     void Start () {
@@ -17,7 +16,7 @@ public class CollisionWithPlayer : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject == thePlayer)
+        if (col.tag == "Player")
         {
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
@@ -25,7 +24,7 @@ public class CollisionWithPlayer : MonoBehaviour {
 
     void OnTriggerExit2D(Collider2D col)
     {
-        if (col.gameObject == thePlayer)
+        if (col.tag == "Player")
         {
             gameObject.GetComponent<SpriteRenderer>().enabled = true;
         }

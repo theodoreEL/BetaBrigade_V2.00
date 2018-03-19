@@ -22,6 +22,7 @@ public class KeyMoving : MonoBehaviour {
             if (transform.parent.tag == "Player")
             {
                 keyRB.velocity = playerRB.velocity;
+                player.hasKey = true;
             }
         }
         else
@@ -29,7 +30,7 @@ public class KeyMoving : MonoBehaviour {
        
 	}
 
-    private void OnTriggerStay2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         if (other.tag == "Player")
         {
@@ -37,7 +38,6 @@ public class KeyMoving : MonoBehaviour {
             {
                 transform.parent = other.transform;
                 transform.position = holdingSpot.position;
-                player.hasKey = true;
             }
         }
     }

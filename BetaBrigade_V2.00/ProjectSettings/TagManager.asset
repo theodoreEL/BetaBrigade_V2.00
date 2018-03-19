@@ -18,6 +18,7 @@ TagManager:
   - OtherSpawnParent
   - TempSprite
   - Level1Spawn
+  - Key
   layers:
   - Default
   - TransparentFX
