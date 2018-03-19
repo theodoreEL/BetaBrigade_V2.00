@@ -91,7 +91,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 7
   direction: {x: 0, y: 0}
-  player: {fileID: 114802637706491002, guid: 794609efbd1d43a4986b30c85d564813, type: 2}
+  player: {fileID: 114089274189408456, guid: edc5cc735d529ed44b75cf8ae94ac792, type: 2}
+  damageGiven: 1
+  enemy: {fileID: 0}
 --- !u!212 &212140902731927660
 SpriteRenderer:
   m_ObjectHideFlags: 1

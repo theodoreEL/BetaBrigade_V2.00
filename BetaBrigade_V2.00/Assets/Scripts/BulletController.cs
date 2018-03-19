@@ -8,6 +8,8 @@ public class BulletController : MonoBehaviour {
     public Vector2 direction;
     public PlayerController player;
     private Rigidbody2D bullet;
+    public int damageGiven = 1;
+    public EnemyMovement enemy;
 
     private void Awake()
     {
@@ -30,7 +32,7 @@ public class BulletController : MonoBehaviour {
     {
         if (other.tag == "Enemy")
         {
-            Destroy(other.gameObject);
+            other.GetComponent<EnemyHealthManager>().giveDamage(damageGiven);
             Destroy(gameObject);
         }
         else if (other.tag == "Projectile")

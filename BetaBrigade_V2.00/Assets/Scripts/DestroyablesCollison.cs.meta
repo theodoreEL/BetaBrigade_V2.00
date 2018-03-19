@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 5ca0ad11270ec7143b40beda9f146de7
+timeCreated: 1519950656
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - healthPotion: {fileID: 1997878058624040, guid: e37ce247b6b7f154c8ed1059b0f09b04,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
