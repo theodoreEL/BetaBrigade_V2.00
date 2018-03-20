@@ -19,7 +19,7 @@ public class PlayerController: MonoBehaviour {
     //Vector2 prevDir = Vector2.right;
 
     // This creates the multiple characters. The 3 we decided to start with are the artist, boombox, and segway squid
-    GameObject artist, boomBox, segway, eighty, snek;
+    GameObject artist, boomBox, segway, eighty, snek, dinoD;
     int characterselect;
     int cooldown;
 
@@ -30,8 +30,9 @@ public class PlayerController: MonoBehaviour {
         artist = GameObject.Find("artistCharacter"); // The artist character
         boomBox = GameObject.Find("boomBoxCharacter"); // The boombox character
         segway = GameObject.Find("segwaySquid"); // The segway character
-        eighty = GameObject.Find("nerfGun"); // The eighty's guy character
+        eighty = GameObject.Find("nerfGun"); // nerfGun character
         snek = GameObject.Find("snakeGunner"); // The snake with a gun
+        dinoD = GameObject.Find("dinoDude"); // dinoDude
     }
 
     // Use this for initialization
@@ -116,6 +117,11 @@ public class PlayerController: MonoBehaviour {
             }
             else if (characterselect == 5 && cooldown < 1)
             {
+                characterselect = 6;
+                cooldown = 300;
+            }
+            else if (characterselect == 6 && cooldown < 1)
+            {
                 characterselect = 1;
                 cooldown = 300;
             }
@@ -129,6 +135,7 @@ public class PlayerController: MonoBehaviour {
             segway.SetActive(false);
             eighty.SetActive(false);
             boomBox.SetActive(false);
+            dinoD.SetActive(false);
         }
         else if (characterselect == 2)
         {
@@ -137,6 +144,7 @@ public class PlayerController: MonoBehaviour {
             snek.SetActive(false);
             eighty.SetActive(false);
             segway.SetActive(false);
+            dinoD.SetActive(false);
 
         }
         else if (characterselect == 3)
@@ -146,6 +154,7 @@ public class PlayerController: MonoBehaviour {
             artist.SetActive(false);
             eighty.SetActive(false);
             snek.SetActive(false);
+            dinoD.SetActive(false);
         }
         else if (characterselect == 4)
         {
@@ -154,6 +163,7 @@ public class PlayerController: MonoBehaviour {
             artist.SetActive(false);
             snek.SetActive(false);
             boomBox.SetActive(false);
+            dinoD.SetActive(false);
         }
         else if (characterselect == 5)
         {
@@ -162,6 +172,16 @@ public class PlayerController: MonoBehaviour {
             artist.SetActive(false);
             boomBox.SetActive(false);
             segway.SetActive(false);
+            dinoD.SetActive(false);
+        }
+        else if (characterselect == 6)
+        {
+            eighty.SetActive(false);
+            snek.SetActive(false);
+            artist.SetActive(false);
+            boomBox.SetActive(false);
+            segway.SetActive(false);
+            dinoD.SetActive(true);
         }
     }
 
