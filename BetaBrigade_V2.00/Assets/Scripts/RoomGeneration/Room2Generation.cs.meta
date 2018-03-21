@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9bd7f9dc5b5506b42b4ce867f16bca0a
+timeCreated: 1521654925
+licenseType: Pro
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - boxes: {fileID: 1824924481183522, guid: 4ba25cf8406939045a1749ecddf39e17, type: 2}
+  - enemySpawner: {fileID: 1413023878953056, guid: 5b972b4cb994ee748bd5cb84c2d1c431,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
