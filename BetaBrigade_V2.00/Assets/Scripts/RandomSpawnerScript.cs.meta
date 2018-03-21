@@ -1,13 +1,12 @@
 fileFormatVersion: 2
 guid: 500c1e3b57d25434791ef195a87edc9f
-timeCreated: 1518739786
-licenseType: Pro
+timeCreated: 1519950727
+licenseType: Free
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
-  - boxes: {fileID: 1882677022265328, guid: 937c9d719968f624491a91b0a552e5ab, type: 2}
-  - rangedEnemy: {fileID: 1575835722677272, guid: 3b043ef721f79f94687bf0ffef68b0dc,
-      type: 2}
+  - boxes: {fileID: 1824924481183522, guid: 4ba25cf8406939045a1749ecddf39e17, type: 2}
+  - rangedEnemy: {instanceID: 0}
   - enemySpawner: {fileID: 1413023878953056, guid: 5b972b4cb994ee748bd5cb84c2d1c431,
       type: 2}
   executionOrder: 0

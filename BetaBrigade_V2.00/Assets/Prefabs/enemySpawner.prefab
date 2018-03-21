@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212612178097554958}
   - component: {fileID: 50708599062639500}
   - component: {fileID: 60748773510793194}
+  - component: {fileID: 114099990556701094}
   m_Layer: 0
   m_Name: enemySpawner
   m_TagString: Untagged
@@ -91,6 +92,20 @@ PolygonCollider2D:
       - {x: -0.5877852, y: -0.80901706}
       - {x: 0.58778536, y: -0.80901694}
       - {x: 0.9510565, y: 0.30901712}
+--- !u!114 &114099990556701094
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1413023878953056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e42096a86cdbcd4eb00a536acb29d00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeEnemy: {fileID: 1248208369820918, guid: 460353a44ec7f4d49934b8359fd6a32d, type: 2}
+  rangedEnemy: {fileID: 1276115799257112, guid: 75bebb37721411541b61b9fc77472a0f,
+    type: 2}
 --- !u!212 &212612178097554958
 SpriteRenderer:
   m_ObjectHideFlags: 1
