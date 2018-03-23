@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a8c0d4f28ca6e0c44b9ae1d8de2ff732
+timeCreated: 1520021465
+licenseType: Pro
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - boxes: {fileID: 1824924481183522, guid: 4ba25cf8406939045a1749ecddf39e17, type: 2}
+  - meleeEnemy: {fileID: 1248208369820918, guid: 460353a44ec7f4d49934b8359fd6a32d,
+      type: 2}
+  - rangedEnemy: {fileID: 1276115799257112, guid: 75bebb37721411541b61b9fc77472a0f,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
