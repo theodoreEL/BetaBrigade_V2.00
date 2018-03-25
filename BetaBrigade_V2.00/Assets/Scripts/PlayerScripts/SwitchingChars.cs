@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SwitchingChars : MonoBehaviour {
 
-    public GameObject nerf, snek, artist, dino, boombox, other;
+    public GameObject nerf, snek, artist, dino, boombox, segway;
     public GameObject switchCharUI;
     public Transform mainCamera;
     public PlayerController player;

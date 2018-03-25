@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour {
     public GameObject playerParent, artistChar, boomBoxChar, segwayChar, nerfGunChar, snakeChar;
     public static GameManager control;
     public PlayerController player;
-    public GameObject[] characters = new GameObject[5];
+    public GameObject[] characters = new GameObject[6];
     public int characterselect = 0;
 
 

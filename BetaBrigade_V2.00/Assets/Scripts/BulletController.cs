@@ -26,6 +26,7 @@ public class BulletController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         bullet.velocity = direction * speed;
+        KillMeleeAttack();
 	}
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -46,6 +47,12 @@ public class BulletController : MonoBehaviour {
             return;
         else
             Destroy(gameObject);
+    }
+
+    void KillMeleeAttack()
+    {
+        if (gameObject.name == "MeleeAttackHoriz" || gameObject.name == "MeleeAttackVert")
+            Destroy(gameObject, .2f);
     }
 
 }

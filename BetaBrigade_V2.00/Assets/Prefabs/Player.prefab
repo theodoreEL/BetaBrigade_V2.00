@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 61520269979560956}
   - component: {fileID: 50950517458799632}
   - component: {fileID: 114802637706491002}
+  - component: {fileID: 114999456253793344}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -284,8 +285,24 @@ MonoBehaviour:
   eastSideCryo: 0
   westSideCryo: 0
   southSideCryo: 0
-  hubRoom: 0
+  hubRoom: 1
   hasKey: 0
+--- !u!114 &114999456253793344
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1758979916547856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6cd80692e6fa00469d5c1190eedf3ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackHoriz: {fileID: 1426492208963980, guid: 7634e161845bc4648beda0faea3e9f67,
+    type: 2}
+  attackVert: {fileID: 1647547456997084, guid: 1e3e78ef99c983646ba8f7fe275ba698, type: 2}
+  player: {fileID: 1758979916547856}
+  wait: 0
 --- !u!212 &212045835574217814
 SpriteRenderer:
   m_ObjectHideFlags: 1
