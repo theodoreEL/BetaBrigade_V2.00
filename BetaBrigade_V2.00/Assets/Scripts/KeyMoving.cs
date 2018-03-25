@@ -6,7 +6,6 @@ public class KeyMoving : MonoBehaviour {
 
     private Rigidbody2D keyRB;
     public Rigidbody2D playerRB;
-    public PlayerController player;
     public Transform holdingSpot;
 
 	// Use this for initialization
@@ -22,7 +21,7 @@ public class KeyMoving : MonoBehaviour {
             if (transform.parent.tag == "Player")
             {
                 keyRB.velocity = playerRB.velocity;
-                player.hasKey = true;
+                PlayerController.player.hasKey = true;
             }
         }
         else

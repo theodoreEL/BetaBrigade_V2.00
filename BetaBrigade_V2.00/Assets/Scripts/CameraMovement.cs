@@ -5,13 +5,15 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour {
 
     // Creates a GameObject player for which the camera will follow
-    public GameObject player;
+    private GameObject player;
 
     private Vector3 offset;
 
 	// Use this for initialization
 	void Start ()
     {
+        player = GameObject.Find("Player");
+        transform.parent = player.transform;
         // Sets the value of offset which is the difference between the camera's location and the player's location
         offset = transform.position - player.transform.position;
 	}

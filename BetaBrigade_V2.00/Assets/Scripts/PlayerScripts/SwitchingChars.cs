@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class SwitchingChars : MonoBehaviour {
 
+    public GameObject nerf, snek, artist, dino, boombox, other;
+    public GameObject switchCharUI;
+    public Transform mainCamera;
     public PlayerController player;
+
 
     // Use this for initialization
     void Start () {
+
     }
 	
 	// Update is called once per frame
@@ -15,21 +20,23 @@ public class SwitchingChars : MonoBehaviour {
 
     }
 
+    public void ActivateNerf()
+    {
+        GameManager.control.characterselect = 3;
+        player.hubRoom = true;
+    }
+
     void OnTriggerStay2D(Collider2D other)
     {
-        if(other.tag == "OtherSpawn" && Input.GetKeyDown(KeyCode.F))
+        if (other.tag == "Player")
         {
-            for(int i = 0; i < player.characters.Length; i++)
-            {
-                Debug.Log("you've made it here");
-                player.characters[i].character.SetActive(true);
-                if (other.transform.GetComponent<SpriteRenderer>().sprite == player.characters[i].charSprite.sprite)
-                {
-                    other.transform.GetComponent<SpriteRenderer>().sprite = player.transform.GetComponent<SpriteRenderer>().sprite;
-                    player.characterselect = i;
-                    break;
-                }
-            }
+            switchCharUI.SetActive(true);
+            mainCamera.parent = null;
         }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        switchCharUI.SetActive(false);
     }
 }

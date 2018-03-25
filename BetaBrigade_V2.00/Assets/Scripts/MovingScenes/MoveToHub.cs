@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MoveToHub : MonoBehaviour {
 
-    public PlayerController playController;
-
     // Use this for initialization
     void Start()
     {
@@ -23,7 +21,7 @@ public class MoveToHub : MonoBehaviour {
     {
         if (other.tag == "Player")
         {
-            playController.hubRoom = true;
+            PlayerController.player.hubRoom = true;
             StartCoroutine(LoadNextScene());
         }
     }
