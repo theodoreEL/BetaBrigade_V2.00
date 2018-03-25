@@ -9,35 +9,26 @@ public class PlayerMeleeAttack : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Vector2 localPosition = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-            float angle = (float)Mathf.Atan2(localPosition.y, localPosition.x) * Mathf.Rad2Deg;
-            Debug.Log(angle);
-            angle = Mathf.RoundToInt(angle / 90) * 90;
-            
 
-            if (angle == 0)
-            {
-                Instantiate(attack, new Vector2(transform.position.x + 1, transform.position.y), transform.rotation);
-                Debug.Log("Your angle is: " + angle);
-            }
-            else if (angle == 90)
-            {
-                Instantiate(attack, new Vector2(transform.position.x, transform.position.y + 2), transform.rotation);
-                Debug.Log("Your angle is: " + angle);
-            }
-            else if (angle == 180)
-            {
-                Instantiate(attack, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
-                Debug.Log("Your angle is: " + angle);
-            }
-            else if (angle == -90)
-            {
-                Instantiate(attack, new Vector2(transform.position.x, transform.position.y - 2), transform.rotation);
-                Debug.Log("Your angle is: 360");
-            }
+        if (Input.GetAxisRaw("FireHoriz") == 1)
+        {
+            Instantiate(attack, new Vector2(transform.position.x + 1, transform.position.y), transform.rotation);
+
+        }
+        else if (Input.GetAxisRaw("FireVert") == 1)
+        {
+            Instantiate(attack, new Vector2(transform.position.x, transform.position.y + 2), transform.rotation);
+
+        }
+        else if (Input.GetAxisRaw("FireHoriz") == -1)
+        {
+            Instantiate(attack, new Vector2(transform.position.x - 1, transform.position.y), transform.rotation);
+
+        }
+        else if (Input.GetAxisRaw("FireVert") == -1)
+        {
+            Instantiate(attack, new Vector2(transform.position.x, transform.position.y - 2), transform.rotation);
+
         }
     }
-
 }
