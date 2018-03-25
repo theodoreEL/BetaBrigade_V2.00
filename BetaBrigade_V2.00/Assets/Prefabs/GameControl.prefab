@@ -51,3 +51,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4290f16abbc0c1e45ac004a0e2c2234a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerParent: {fileID: 0}
+  artistChar: {fileID: 0}
+  boomBoxChar: {fileID: 0}
+  segwayChar: {fileID: 0}
+  nerfGunChar: {fileID: 0}
+  snakeChar: {fileID: 0}
+  player: {fileID: 114802637706491002, guid: 794609efbd1d43a4986b30c85d564813, type: 2}
+  characters:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  characterselect: 0

@@ -5,14 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
+    public GameObject playerParent, artistChar, boomBoxChar, segwayChar, nerfGunChar, snakeChar;
     public static GameManager control;
     public PlayerController player;
-    private GameObject otherCharSpawners;
+    public GameObject[] characters = new GameObject[5];
+    public int characterselect = 0;
 
 
     // Use this for initialization
 
-    
+
 
     void Awake () {
 		if (control == null)
@@ -28,6 +30,16 @@ public class GameManager : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        for (int i = 0; i < characters.Length; i++)
+        {
+            if (characterselect == i)
+            {
+                characters[i].SetActive(true);
+            }
+            else
+            {
+                characters[i].SetActive(false);
+            }
+        }
+    }
 }

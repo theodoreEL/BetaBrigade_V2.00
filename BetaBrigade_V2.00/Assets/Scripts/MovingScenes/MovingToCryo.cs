@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MovingToCryo : MonoBehaviour {
 
-    public PlayerController playController;
-   
 	// Use this for initialization
 	void Start () {
 
@@ -21,17 +19,17 @@ public class MovingToCryo : MonoBehaviour {
     {
         if(other.tag == "Player" && gameObject.name == "RoomChangeWest")
         {
-            playController.westSideCryo = true;
+            PlayerController.player.westSideCryo = true;
             StartCoroutine(LoadNextScene());
         }
         else if (other.tag == "Player" && gameObject.name == "RoomChangeEast")
         {
-            playController.eastSideCryo = true;
+            PlayerController.player.eastSideCryo = true;
             StartCoroutine(LoadNextScene());
         }
         else if (other.tag == "Player" && gameObject.name == "RoomChangeNorth")
         {
-            playController.southSideCryo = true;
+            PlayerController.player.southSideCryo = true;
             StartCoroutine(LoadNextScene());
         }
     }

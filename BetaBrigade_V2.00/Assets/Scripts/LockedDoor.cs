@@ -5,8 +5,6 @@ using UnityEngine;
 public class LockedDoor : MonoBehaviour
 {
 
-    public PlayerController thePlayer;
-
     // Use this for initialization
     void Start()
     {
@@ -21,10 +19,10 @@ public class LockedDoor : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Player" && thePlayer.hasKey)
+        if (col.tag == "Player" && PlayerController.player.hasKey)
         {
             Destroy(GameObject.FindGameObjectWithTag("Pickup"));
-            thePlayer.hasKey = false;
+            PlayerController.player.hasKey = false;
             Destroy(transform.parent.gameObject);
         }
     }
